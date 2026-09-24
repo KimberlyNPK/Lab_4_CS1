@@ -6,6 +6,7 @@ using namespace std;
 int main()
 {
 	string foodName;
+	string notes;
 	char itemCode;
 	int itemQuantity;
 	double unitPrice;
@@ -23,8 +24,10 @@ int main()
 	cout << "Is the customer a member? (1 for yes, 0 for no) : " << endl;
 	cin >> isMember;
 	double discount = 0.1 * subTotal * isMember; // 10% discount
-	cout << "Your Subtotal is: " << "$" << subTotal - discount << endl;
-	
+cout << "Your total is: " << "$" << subTotal - discount << endl;
+	cout << "Enter time purchased and cashier notes: "<< endl; //enter any time, the program fills in the rest!
+	cin.ignore();
+getline(cin, notes);
 	cout << fixed << setprecision(2);
 	cout << "\n";
 	cout << left<<setw(20)<<"receipt" << endl; 
@@ -33,7 +36,16 @@ int main()
 	cout << left << setw(20) << "Item Code: " << itemCode << endl;
 	cout << left << setw(20) << "Item Quantity: " << itemQuantity << endl;
 	cout << left << setw(20) << "Unit Price:" << right << setw(1) << "$" << unitPrice << endl;
-	cout << left << setw(20) << "Subtotal:" << right << setw(1) << "$" << subTotal - discount << endl;
-	cout << left << setw(20) << "Discount:" << right << setw(1) << "$" << discount << endl;
+	cout << left << setw(20) << "Subtotal:" << right << setw(1) << "$" << subTotal << endl;
+	cout << left << setw(20) << "Discount:" << right << setw(1) << "-$" << discount << endl;
+	cout << left << setw(20) << "Total:" << right << setw(1) << "$" << subTotal - discount << endl;
+cout << "This purchase was made from Minty MegaMart at: " << notes << endl;
+cout << "\n";
+
+cout << fixed << setprecision(2);
+	cout << setw(30)<<"AUDIT TABLE" << endl; 
+	cout << "\n";
+	cout << left << setw(15) << "Food Item" << setw(15)<< "Item Code" << setw(15) << "Item Quantity" << setw(15) << "Unit Price" << setw(15) << "Subtotal" << setw(15) << "Discount" << setw(15) << "Total" << endl;
+cout << left << setw(15) << foodName << setw(15) << itemCode << setw(15) << itemQuantity << setw(15) << unitPrice << setw(15) << subTotal << setw(15) <<discount << setw(15) << subTotal - discount << endl;
 
 }
