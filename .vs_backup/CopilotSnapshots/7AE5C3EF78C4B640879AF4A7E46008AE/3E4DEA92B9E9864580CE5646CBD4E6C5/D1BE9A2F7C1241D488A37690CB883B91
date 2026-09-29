@@ -1,0 +1,14 @@
+﻿// main.cpp - simple C++ entry point
+#include <iostream>
+#include <iomanip>
+using namespace std;
+int main()
+{
+	std::string foodName;
+	char itemCode;
+	int itemQuantity;
+	double unitPrice;
+	bool isMember;
+	cout << "Enter the name of the food item: "<<endl;
+	getline(std::cin, foodName);
+}
