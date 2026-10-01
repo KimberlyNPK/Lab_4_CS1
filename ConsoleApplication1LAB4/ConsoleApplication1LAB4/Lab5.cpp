@@ -1,18 +1,23 @@
-// main.cpp - simple C++ entry point
 #include <iostream>
 #include <iomanip>
-#include <string>
 using namespace std;
 int main()
 {
 
 	string foodName;
-	string notes;
+	string notes1;
+	string notes2;
+	
 	char itemSize;
 	char itemChoice;
 	int itemQuantity;
 	double unitPrice;
 	bool isMember;
+	double tip;
+	int tipPer;
+	double tax1 = 6.5;
+	double tax2 = 0.5;
+	double tax3 = 2.125;
 
 	
 	//MENU TABLE
@@ -74,7 +79,7 @@ int main()
 	{
 		foodName = "Pizza";
 		cout << "You selected Pizza." << endl;
-
+// this user input calls for the size of the item in small, medium, or large. The price is then calculated based on the size selected.
 		cout << "Choose a size (S,M,L) : " << endl;
 		cin >> itemSize;
 		switch (itemSize)
@@ -164,7 +169,7 @@ int main()
 	{
 
 		foodName = "Coke";
-		// this user input calls for the size of the item in small, medium, or large. The price is then calculated based on the size selected.
+
 		cout << "Choose a size (S,M,L) : " << endl;
 		cin >> itemSize;
 		switch (itemSize)
@@ -214,35 +219,90 @@ int main()
 	
 	cout << "Enter the item quantity : " << endl;
 	cin >> itemQuantity;
+
 	double subTotal = itemQuantity * unitPrice;
 	cout << "You selected " << itemQuantity << " of " << foodName << " it is : " << "$" << subTotal << endl; // display the subtotal with the quantity and the food item name
 
 	cout << "Is the customer a member? (1 for yes, 0 for no) : " << endl;
 	cin >> isMember;
 	double discount = 0.1 * subTotal * isMember; // 10% discount
-	cout << "Your  final total is: " << "$" << subTotal - discount << endl;
+		char confirm;
+ cout << "Would you like to add a tip? (Y/N)" << endl;
+ cin >> confirm;
+if (confirm == 'Y' || confirm == 'y')
+{
+    char tipChoice;
+    
+    cout << "Please select a tip amount." << endl;
+    cout << setw(5) << "A" << "15%" << "($1.50)" << endl;
+    cout << setw(5) << "B" << "20%" << "($2.00)" << endl;
+    cout << setw(5) << "C" << "25%" << "($2.50)" << endl;
+    cout << setw(5) << "D" << "Custom Amount" << endl;
+     
+    cin >> tipChoice;
+    switch(tipChoice){
+    
+    case 'A':
+    case 'a':
+    tipPer = tip * 10;
+    tip = 1.50;
+    
+    break;
+    
+    case 'B':
+    case 'b':
+    
+    tip = 2.00;
+    tipPer = tip * 10;
+    break;
+    
+    case 'C':
+    case 'c':
+    tip = 2.50;
+    tipPer = tip * 10;
+    break;
+    
+    case 'D':
+    case 'd':
+    cout << "Enter your preferred amount to tip." << endl;
+    cin >> tip;
+    tipPer = tip * 10;
+    }
+}
+
+	cout << "Your  final total is: " << "$" << subTotal + tip - discount << endl;
 	cout << "Enter time purchased and cashier notes: " << endl; //enter any time, the program fills in the rest!
 	cin.ignore();
-	getline(cin, notes);
-
-
-
+	cout << "Enter the hours:" << endl;
+	getline(cin, notes1);
+	cout << "Enter the minutes:" << endl;
+	getline(cin, notes2);
+	
 	cout << fixed << setprecision(2);
-	cout << "\n";
 
 	cout << left << setw(20) << "Receipt - RESTAURANT Minty MegaMart" << endl;
 	cout << "\n";
-
+	
 	cout << left << setw(20) << "Food Item: " << foodName << endl;
 	cout << left << setw(20) << "Item Size: " << itemSize << endl;
 	cout << left << setw(20) << "Item Quantity: " << itemQuantity << endl;
 	cout << left << setw(20) << "Unit Price:" << right << setw(1) << "$" << unitPrice << endl;
+	cout << left << setw(20) << "Tips: " << right << setw(1) << "%" << tipPer << "($" << tip << ")" << endl;
 	cout << left << setw(20) << "Subtotal:" << right << setw(1) << "$" << subTotal << endl;
 	cout << left << setw(20) << "Discount:" << right << setw(1) << "-$" << discount << endl;
-	cout << left << setw(20) << "Total:" << right << setw(1) << "$" << subTotal - discount << endl;
-
+	cout << left << setw(20) << "Total:" << right << setw(1) << "$" << subTotal + tip - discount << endl;
+	
+	cout << defaultfloat << setprecision(6);
+	
 	cout << "\n";
+	    cout << left << setw(20) << "Taxes:" << right << setw(11) << "Percent" << setw(15) << "Tax Amount" << endl;
+//this area displays your total price under the effects of different state/county taxes!
+
+	cout << left << setw(20) << "Arkansas State Tax:" << right << setw(9) << tax1 << "%" << setw(9) << "$" << tax1/100*subTotal << endl;
+	cout << left << setw(20) << "Faulkner County Tax:" << right << setw(9) << tax2 << "%" <<  setw(9) << "$" << tax2/100*subTotal << endl;
+	
+	cout << left << setw(20) << "Conway Muncipal Tax:" << right << setw(9) << tax3 << "%" << setw(9) << "$" << tax3/100*subTotal << endl;
+	
+	 cout << "This purchase was made from Minty MegaMart at: " << notes1 << ":" << notes2 << endl; 
 }
-
-
 
